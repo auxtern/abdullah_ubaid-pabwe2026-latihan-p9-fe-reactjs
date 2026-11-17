@@ -81,22 +81,6 @@ describe('apiHelper', () => {
     import.meta.env.VITE_API_BASE_URL = originalViteApi
   })
 
-  it('routes through /api proxy in development mode for https endpoints', () => {
-    const origDev = import.meta.env.DEV
-    const origMode = import.meta.env.MODE
-    const origUrl = import.meta.env.VITE_API_BASE_URL
-
-    import.meta.env.DEV = true
-    import.meta.env.MODE = 'development'
-    import.meta.env.VITE_API_BASE_URL = 'https://custom-untrusted.example.com/api'
-
-    expect(apiHelper.getBaseUrl()).toBe('/api')
-
-    import.meta.env.DEV = origDev
-    import.meta.env.MODE = origMode
-    import.meta.env.VITE_API_BASE_URL = origUrl
-  })
-
   it('throws error on non-ok responses with response error or fallback', async () => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: false,

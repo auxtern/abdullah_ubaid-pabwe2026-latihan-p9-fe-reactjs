@@ -1,12 +1,6 @@
 const apiHelper = (() => {
   const getBaseUrl = () => {
-    const raw = import.meta.env?.VITE_API_BASE_URL
-    // Di dev mode, jika base URL adalah HTTPS, lewatkan via Vite proxy /api (secure: false)
-    // agar sertifikat SSL self-signed / untrusted tidak diblokir oleh browser
-    if (import.meta.env.DEV && import.meta.env.MODE !== 'test' && raw && raw.startsWith('https://')) {
-      return '/api'
-    }
-    return raw || 'http://localhost:7071/api'
+    return import.meta.env?.VITE_API_BASE_URL || 'http://localhost:7071/api'
   }
 
   function getAccessToken() {
